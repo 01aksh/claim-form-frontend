@@ -5,6 +5,7 @@ import BondInformations from "../../components/BondInformation/BondInformation.j
 import ClaimInformation from "../../components/ClaimInformation/ClaimInformation.jsx";
 import ClaimPayment from "../../components/ClaimPayment/ClaimPayment.jsx";
 import ClaimRecovery from "../../components/ClaimRecovery/ClaimRecovery.jsx";
+import CustomButton from "../../components/CustomButton/CustomButton.jsx";
 import StepsTracker from "../../components/Steptracker/Steptracker.jsx";
 import { steps, TimeBarredDays } from "../../utils/constant.js";
 
@@ -52,6 +53,13 @@ const ClaimPage = () => {
   const [claimInformationErrors, setClaimInformationErrors] = useState({});
 
   const [isDataFilled, setIsDataFilled] = useState(false);
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  // Toggle sidebar visibility
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
 
   /**
    * The handleBondInfoInputChange function updates the BondInformation state with the new value based on the input name.
@@ -258,12 +266,6 @@ const ClaimPage = () => {
       data.breachNoticeDays.trim();
     setIsDataFilled(isFilled);
   };
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // State to manage sidebar visibility
-
-  // Toggle sidebar visibility
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
 
   return (
     <div className="flex w-full">
@@ -390,13 +392,7 @@ const ClaimPage = () => {
         </div>
 
         <div className="flex justify-end mt-6">
-          <button
-            onClick={handleSave}
-            // disabled={!isDataFilled}
-            className="px-6 py-2 text-white bg-[#8DC13F] rounded-md hover:bg-green-600"
-          >
-            Save and Exit
-          </button>
+          <CustomButton onClick={handleSave}>Save and Exit</CustomButton>
         </div>
       </div>
     </div>
