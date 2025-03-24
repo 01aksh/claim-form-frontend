@@ -1,5 +1,3 @@
-# React + Vite
-
 # Claim Form Frontend
 
 This is the frontend for the **Claim Form** application. It is built using **React** and **Tailwind CSS** for styling. The frontend interacts with a backend API to submit and manage claim-related data.
