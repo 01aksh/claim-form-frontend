@@ -49,6 +49,8 @@ const ClaimPage = () => {
 
   const [isFirstFormValid, setIsFirstFormValid] = useState(false);
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [errors, setErrors] = useState({});
   const [claimInformationErrors, setClaimInformationErrors] = useState({});
 
@@ -150,6 +152,7 @@ const ClaimPage = () => {
    * successfully submitting the claim.
    */
   const submitClaim = async () => {
+    setIsLoading(true);
     const bondInformationObject = {
       claim_no: BondInformation.claimNo,
       claim_date: BondInformation?.claimDate,
@@ -171,11 +174,14 @@ const ClaimPage = () => {
 
     try {
       const response = await postClaim(bondInformationObject);
-      console.log("Claim submitted successfully:", response.data);
+      alert("Claim submitted successfully:");
       return response.data;
     } catch (error) {
+      alert("Error submitting claim. Please try again.");
       console.error("Error submitting claim:", error);
       throw error;
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -189,7 +195,7 @@ const ClaimPage = () => {
     if (isFirstFormValid) {
       setIsFirstFormValid(true);
       submitClaim(BondInformation);
-      alert("Bond Information Done");
+      alert("Bond Information Filled");
       setCurrentStep((prevState) => prevState + 1);
 
       const isSecondFormValid = validateClaimInformationForm();
@@ -392,7 +398,9 @@ const ClaimPage = () => {
         </div>
 
         <div className="flex justify-end mt-6">
-          <CustomButton onClick={handleSave}>Save and Exit</CustomButton>
+          <CustomButton onClick={handleSave} disabled={isLoading}>
+            {isLoading ? "Saving..." : "Save and Exit"}
+          </CustomButton>
         </div>
       </div>
     </div>
