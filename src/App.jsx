@@ -1,10 +1,7 @@
-import ClaimPage from "./pages/view/ClaimPage.jsx";
-
 const App = () => {
-  // In Future We can integrate Routes Here
   return (
     <div>
-      <ClaimPage />
+      <h1>Welcome to the React App</h1>
     </div>
   );
 };
