@@ -1,20 +1,17 @@
-import { useContext } from "react";
-import { CounterContext } from "./context/Example";
+import { useState } from "react";
+import ChildToParent from "./components/ChildToParent/ChildToParent";
 
 const App = () => {
-  const { count, setCount } = useContext(CounterContext);
+  const [message, setMessage] = useState("");
+
+  const handleMessage = (msg) => {
+    setMessage(msg);
+  };
   return (
     <div>
       <h1>Welcome to the React App</h1>
-      <div className="text-center">
-        <h3 className="text-2xl">Count is: {count}</h3>
-        <button
-          onClick={() => setCount(count + 1)}
-          className="p-2 text-white bg-pink-600 rounded"
-        >
-          Increase Count
-        </button>
-      </div>
+      <ChildToParent sendDatatoParent={handleMessage} />
+      <h2>Message from Child: {message}</h2>
     </div>
   );
 };
